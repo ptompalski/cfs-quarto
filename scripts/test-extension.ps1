@@ -26,6 +26,8 @@ Copy-Item -LiteralPath (Join-Path $repositoryRoot "NRCan_CFS_logo_PT_englishOnly
 Compress-Archive -Path (Join-Path $packageRoot "*") -DestinationPath $archivePath
 
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "tests\smoke.qmd") -Destination $smokeRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot "tests\footer-two-authors.qmd") -Destination $smokeRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot "tests\footer-many-authors.qmd") -Destination $smokeRoot
 
 Push-Location $smokeRoot
 try {
@@ -38,6 +40,22 @@ try {
 
   if (-not (Test-Path -LiteralPath (Join-Path $smokeRoot "smoke.html"))) {
     throw "Smoke-test HTML was not created."
+  }
+
+  & quarto render footer-two-authors.qmd
+  if ($LASTEXITCODE -ne 0) { throw "Two-author footer render failed." }
+
+  & quarto render footer-many-authors.qmd
+  if ($LASTEXITCODE -ne 0) { throw "Many-author footer render failed." }
+
+  $twoAuthorHtml = Get-Content -Raw -LiteralPath (Join-Path $smokeRoot "footer-two-authors.html")
+  if ($twoAuthorHtml -notmatch '<div class="footer footer-default">\s*<p>Ada Lovelace, Grace Hopper \| Forest analysis</p>') {
+    throw "Two-author footer does not contain both author names."
+  }
+
+  $manyAuthorHtml = Get-Content -Raw -LiteralPath (Join-Path $smokeRoot "footer-many-authors.html")
+  if ($manyAuthorHtml -notmatch '<div class="footer footer-default">\s*<p>Lovelace et al\. \| Forest analysis</p>') {
+    throw "Many-author footer does not use the first author's family name and et al."
   }
 }
 finally {

@@ -114,6 +114,10 @@ if ($galleryHtml.Contains("Organization name | Presentation title")) {
   throw "The gallery footer still contains the organization placeholder."
 }
 
+if ($galleryHtml -notmatch '<div class="footer footer-default">\s*<p>Firstname Lastname \| Presentation title</p>') {
+  throw "The gallery footer does not include its single author."
+}
+
 if ($galleryHtml -notmatch 'NRCan_CFS_logo_PT_englishOnly\.svg') {
   throw "The rendered gallery does not reference the supplied NRCan CFS logo."
 }

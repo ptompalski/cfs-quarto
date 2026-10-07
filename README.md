@@ -18,7 +18,9 @@ quarto add ptompalski/cfs-quarto
 ```
 
 The repository includes a starter presentation and a gallery of the available
-slide layouts.
+slide layouts. The theme automatically prefixes the configured footer with the
+author: one full name, both full names for two authors, or the first author's
+family name followed by `et al.` for larger teams.
 
 ## Screenshots
 

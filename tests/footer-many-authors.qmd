@@ -1,0 +1,16 @@
+---
+title: "Many-author footer test"
+author:
+  - name:
+      given: "Ada"
+      family: "Lovelace"
+  - "Grace Hopper"
+  - "Katherine Johnson"
+format:
+  cfs-revealjs:
+    footer: "Forest analysis"
+---
+
+## Test slide
+
+Many-author footer fixture.

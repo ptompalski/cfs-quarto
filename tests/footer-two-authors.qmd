@@ -1,0 +1,13 @@
+---
+title: "Two-author footer test"
+author:
+  - "Ada Lovelace"
+  - "Grace Hopper"
+format:
+  cfs-revealjs:
+    footer: "Forest analysis"
+---
+
+## Test slide
+
+Two-author footer fixture.
