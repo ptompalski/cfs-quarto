@@ -1,0 +1,33 @@
+<section id="$idprefix$title-slide" class="quarto-title-block"$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$>
+  <div class="cfs-title-content">
+    <h1 class="title">$title$</h1>
+    $if(subtitle)$
+    <p class="subtitle">$subtitle$</p>
+    $endif$
+    <div class="cfs-title-meta">
+      $for(author)$
+      <p class="author">$author$</p>
+      $endfor$
+      $for(institute)$
+      <p class="institute">$institute$</p>
+      $endfor$
+      $if(date)$
+      <p class="date">$date$</p>
+      $endif$
+    </div>
+  </div>
+  $if(cfs-corporate-signature)$
+  <div class="cfs-title-branding" aria-label="Institutional branding">
+    <img class="cfs-corporate-signature" src="$cfs-corporate-signature$" alt="Approved NRCan corporate signature">
+    $if(cfs-canada-wordmark)$
+    <img class="cfs-canada-wordmark" src="$cfs-canada-wordmark$" alt="Approved Canada wordmark">
+    $endif$
+  </div>
+  $else$
+  $if(cfs-canada-wordmark)$
+  <div class="cfs-title-branding cfs-title-branding-single" aria-label="Institutional branding">
+    <img class="cfs-canada-wordmark" src="$cfs-canada-wordmark$" alt="Approved Canada wordmark">
+  </div>
+  $endif$
+  $endif$
+</section>

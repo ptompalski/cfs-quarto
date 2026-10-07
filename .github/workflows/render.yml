@@ -1,0 +1,49 @@
+name: Render Quarto presentations
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.5.55"
+
+      - name: Render template and gallery
+        run: quarto render
+
+      - name: Check rendered theme invariants
+        shell: pwsh
+        run: ./tests/check-rendered-theme.ps1
+
+      - name: Package current extension source
+        run: zip -rq "$RUNNER_TEMP/cfs-quarto.zip" _extensions template.qmd
+
+      - name: Test installation in a separate project
+        run: |
+          mkdir "$RUNNER_TEMP/cfs-smoke"
+          cp tests/smoke.qmd "$RUNNER_TEMP/cfs-smoke/smoke.qmd"
+          cd "$RUNNER_TEMP/cfs-smoke"
+          quarto add "$RUNNER_TEMP/cfs-quarto.zip" --no-prompt
+          quarto render smoke.qmd
+          test -f smoke.html
+
+      - name: Test project creation from the template
+        run: |
+          mkdir "$RUNNER_TEMP/cfs-template"
+          cd "$RUNNER_TEMP/cfs-template"
+          quarto use template "$RUNNER_TEMP/cfs-quarto.zip" --no-prompt
+          quarto render *.qmd
+          test -n "$(find . -maxdepth 1 -name '*.html' -print -quit)"

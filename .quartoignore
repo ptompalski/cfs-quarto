@@ -1,0 +1,7 @@
+examples/
+helpers/
+scripts/
+tests/
+AI/
+AGENTS.md
+_build/

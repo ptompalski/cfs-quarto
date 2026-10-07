@@ -1,0 +1,8 @@
+/_build/
+/.quarto/
+/**/*_files/
+/.Rproj.user/
+.DS_Store
+Thumbs.db
+AI
+AGENTS.md

@@ -1,0 +1,71 @@
+---
+title: "Presentation title"
+subtitle: "Example subtitle"
+author: "Firstname Lastname"
+institute: "Organization or affiliation"
+date: today
+format:
+  cfs-revealjs:
+    footer: "Canadian Forest Service | Research presentation"
+    slide-number: c/t
+execute:
+  echo: true
+---
+
+## Research question
+
+State the scientific question in one sentence, then give the audience only the
+context needed to interpret the analysis.
+
+- What process or population does the study examine?
+- Which evidence resolves the question?
+- What decision could the result inform?
+
+::: notes
+Use speaker notes for detail that does not belong on the slide.
+:::
+
+## Study design {.section-slide .center background-color="#183F35"}
+
+<div class="section-number">01 / Methods</div>
+
+Sampling, analysis, and validation
+
+## Data and methods
+
+:::: {.columns}
+
+::: {.column width="48%"}
+### Data
+
+- Study area and period
+- Sampling unit and response
+- Main predictors and covariates
+:::
+
+::: {.column width="48%"}
+### Analysis
+
+$$
+y_i = \beta_0 + \beta_1 x_i + b_{s[i]} + \epsilon_i
+$$
+
+Describe assumptions and validation in plain language.
+:::
+
+::::
+
+## Main result {.key-result}
+
+<div class="key-number">00%</div>
+
+<div class="key-label">Replace this sentence with the main quantitative finding.</div>
+
+<div class="key-context">Report uncertainty, comparison, and sample size.</div>
+
+## Conclusions {.conclusion-slide}
+
+- State the answer to the research question.
+- Quantify the most important result.
+- Name the limitation that affects interpretation.
+- End with the practical implication.

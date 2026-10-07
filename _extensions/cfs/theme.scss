@@ -1,0 +1,510 @@
+/*-- scss:defaults --*/
+
+// CFS-inspired palette. All values use !default so a downstream SCSS file can
+// override them without modifying the extension.
+$cfs-forest: #183f35 !default;
+$cfs-sage: #77917b !default;
+$cfs-off-white: #f5f7f3 !default;
+$cfs-charcoal: #26342f !default;
+$cfs-blue: #31758c !default;
+$cfs-rule: #d5ddd7 !default;
+
+$body-bg: #ffffff !default;
+$body-color: $cfs-charcoal !default;
+$link-color: $cfs-blue !default;
+$selection-bg: $cfs-sage !default;
+$selection-color: #ffffff !default;
+$light-bg-text-color: $cfs-charcoal !default;
+$light-bg-link-color: $cfs-blue !default;
+$dark-bg-text-color: #ffffff !default;
+$dark-bg-link-color: #d7ebf1 !default;
+
+$font-family-sans-serif: "Source Sans Pro", "Segoe UI", Helvetica, Arial, sans-serif !default;
+$font-family-monospace: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace !default;
+$presentation-font-size-root: 34px !default;
+$presentation-font-smaller: 0.72 !default;
+$presentation-line-height: 1.28 !default;
+$presentation-block-margin: 0.45em !default;
+$presentation-slide-text-align: left !default;
+$presentation-title-slide-text-align: left !default;
+
+$presentation-heading-font: $font-family-sans-serif !default;
+$presentation-heading-color: $cfs-forest !default;
+$presentation-heading-line-height: 1.08 !default;
+$presentation-heading-letter-spacing: -0.018em !default;
+$presentation-heading-text-transform: none !default;
+$presentation-heading-text-shadow: none !default;
+$presentation-heading-font-weight: 600 !default;
+$presentation-h1-font-size: 2.2em !default;
+$presentation-h2-font-size: 1.48em !default;
+$presentation-h3-font-size: 1.08em !default;
+$presentation-h4-font-size: 0.92em !default;
+
+$code-block-bg: $cfs-off-white !default;
+$code-block-border-color: $cfs-rule !default;
+$code-block-font-size: 0.5em !default;
+$border-color: $cfs-rule !default;
+$border-radius: 0 !default;
+
+/*-- scss:rules --*/
+
+:root {
+  --cfs-forest: #{$cfs-forest};
+  --cfs-sage: #{$cfs-sage};
+  --cfs-off-white: #{$cfs-off-white};
+  --cfs-charcoal: #{$cfs-charcoal};
+  --cfs-blue: #{$cfs-blue};
+  --cfs-rule: #{$cfs-rule};
+}
+
+.reveal {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.reveal .slides section {
+  box-sizing: border-box;
+}
+
+.reveal .slides section > h2 {
+  border-bottom: 2px solid $cfs-rule;
+  margin: 0 0 0.62em 0;
+  padding: 0 0 0.2em 0;
+}
+
+.reveal h3 {
+  color: $cfs-charcoal;
+  margin-top: 0.55em;
+}
+
+.reveal p,
+.reveal li {
+  max-width: 44em;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-left: 1.15em;
+}
+
+.reveal li::marker {
+  color: $cfs-sage;
+}
+
+.reveal strong {
+  color: $cfs-forest;
+  font-weight: 600;
+}
+
+.reveal a {
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.12em;
+}
+
+.reveal blockquote {
+  border-left: 0.18em solid $cfs-sage;
+  box-shadow: none;
+  color: $cfs-charcoal;
+  font-style: normal;
+  margin-left: 0;
+  padding: 0.18em 0 0.18em 0.75em;
+  width: auto;
+}
+
+.reveal table {
+  border-collapse: collapse;
+  font-size: 0.68em;
+  width: 100%;
+}
+
+.reveal table thead th {
+  border-bottom: 2px solid $cfs-forest;
+  color: $cfs-forest;
+  font-weight: 600;
+  padding: 0.38em 0.55em;
+}
+
+.reveal table tbody td {
+  border-bottom: 1px solid $cfs-rule;
+  padding: 0.38em 0.55em;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background: $cfs-off-white;
+}
+
+.reveal pre {
+  box-shadow: none;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.reveal div.sourceCode {
+  border-left: 0.16em solid $cfs-sage;
+}
+
+.reveal code {
+  border-radius: 0;
+}
+
+.reveal .math.display {
+  margin: 0.8em 0;
+}
+
+.reveal .quarto-figure,
+.reveal figure {
+  margin: 0 auto;
+}
+
+.reveal figcaption,
+.reveal .figure-caption,
+.reveal .source-note {
+  color: #53635d;
+  font-size: 0.48em;
+  line-height: 1.25;
+  margin-top: 0.45em;
+  text-align: left;
+}
+
+.reveal .citation,
+.reveal .footnote-ref {
+  color: $cfs-blue;
+}
+
+.reveal .columns {
+  gap: 1.25em;
+}
+
+.reveal .column > :first-child {
+  margin-top: 0;
+}
+
+// Title slide
+#title-slide,
+.reveal .slides section.quarto-title-block {
+  background: $cfs-off-white;
+  color: $cfs-charcoal;
+  min-height: 100%;
+  padding-top: 4em;
+  padding-right: 0;
+  position: relative;
+  text-align: left;
+}
+
+#title-slide .cfs-title-content,
+.reveal .slides section.quarto-title-block .cfs-title-content {
+  max-width: 60%;
+  position: relative;
+  width: 60%;
+  z-index: 1;
+}
+
+#title-slide .cfs-title-branding,
+.reveal .slides section.quarto-title-block .cfs-title-branding {
+  z-index: 1;
+}
+
+#title-slide::after,
+.reveal .slides section.quarto-title-block::after {
+  background: $cfs-forest;
+  bottom: -6.5%;
+  content: "";
+  position: absolute;
+  right: -6.5%;
+  top: -6.5%;
+  width: 27%;
+  z-index: 0;
+}
+
+#title-slide .title,
+.reveal .slides section.quarto-title-block .title {
+  color: $cfs-forest;
+  font-size: 2.25em;
+  line-height: 1.02;
+  margin: 0 0 0.26em 0;
+  max-width: 100%;
+}
+
+#title-slide .subtitle,
+.reveal .slides section.quarto-title-block .subtitle {
+  color: $cfs-charcoal;
+  font-size: 1.02em;
+  line-height: 1.25;
+  margin: 0;
+  max-width: 100%;
+}
+
+#title-slide .cfs-title-meta,
+.reveal .slides section.quarto-title-block .cfs-title-meta {
+  border-left: 0.16em solid $cfs-sage;
+  margin-top: 2.1em;
+  padding-left: 0.65em;
+}
+
+#title-slide .author,
+#title-slide .institute,
+#title-slide .date,
+.reveal .slides section.quarto-title-block .author,
+.reveal .slides section.quarto-title-block .institute,
+.reveal .slides section.quarto-title-block .date {
+  font-size: 0.7em;
+  line-height: 1.25;
+  margin: 0.12em 0;
+}
+
+#title-slide .author,
+.reveal .slides section.quarto-title-block .author {
+  color: $cfs-forest;
+  font-weight: 600;
+}
+
+.cfs-title-branding {
+  align-items: flex-end;
+  bottom: 0;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  left: 0;
+  position: absolute !important;
+  width: 60%;
+}
+
+.cfs-title-branding img {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  max-height: 1.25em;
+  max-width: 46%;
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+.cfs-title-branding-single {
+  justify-content: flex-end;
+}
+
+// Section divider
+.reveal .slides section.section-slide {
+  color: #ffffff;
+}
+
+.reveal .slides section.section-slide h2 {
+  border-bottom: 0.08em solid $cfs-sage;
+  color: #ffffff;
+  font-size: 2.05em;
+  margin: 0;
+  padding: 0 0 0.24em 0;
+}
+
+.reveal .slides section.section-slide .section-number {
+  color: #c9d6cc;
+  font-size: 0.58em;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8em;
+  text-transform: uppercase;
+}
+
+.reveal .slides section.section-slide p {
+  color: #e8eeea;
+  font-size: 0.78em;
+  margin-top: 0.8em;
+}
+
+// Figure-led slides
+.reveal .slides section.full-figure > h2 {
+  font-size: 1.12em;
+  margin-bottom: 0.35em;
+}
+
+.reveal .slides section.full-figure .quarto-figure,
+.reveal .slides section.full-figure figure {
+  width: 100%;
+}
+
+.reveal .slides section.full-figure img {
+  display: block;
+  margin: 0 auto;
+  max-height: 680px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.reveal .slides section.full-bleed {
+  padding: 0;
+}
+
+.reveal .slides section.full-bleed > h2 {
+  margin: 0 0 0.3em 0;
+}
+
+// Key result
+.reveal .slides section.key-result {
+  border-left: 0.26em solid $cfs-sage;
+  min-height: 100%;
+  padding-top: 5.4em;
+  padding-left: 1.25em;
+}
+
+.reveal .slides section.key-result > h2 {
+  border: 0;
+  font-size: 1.05em;
+  margin-bottom: 0.75em;
+}
+
+.reveal .key-number {
+  color: $cfs-forest;
+  font-size: 3.4em;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+  margin: 0;
+}
+
+.reveal .key-label {
+  color: $cfs-charcoal;
+  font-size: 1em;
+  line-height: 1.2;
+  margin-top: 0.55em;
+  max-width: 27em;
+}
+
+.reveal .key-context {
+  color: #53635d;
+  font-size: 0.62em;
+  margin-top: 1em;
+}
+
+// Conclusions
+.reveal .slides section.conclusion-slide {
+  background: $cfs-off-white;
+  border-top: 0.22em solid $cfs-forest;
+  min-height: 100%;
+}
+
+.reveal .slides section.conclusion-slide > h2 {
+  border-bottom-color: $cfs-sage;
+}
+
+.reveal .conclusion-slide ol,
+.reveal .conclusion-slide ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.reveal .conclusion-slide li {
+  border-bottom: 1px solid $cfs-rule;
+  padding: 0.38em 0 0.38em 1.35em;
+  position: relative;
+}
+
+.reveal .conclusion-slide li::before {
+  color: $cfs-sage;
+  content: "◆";
+  font-size: 0.58em;
+  left: 0;
+  position: absolute;
+  top: 0.78em;
+}
+
+// Methodology flow uses a flat inline composition rather than cards.
+.reveal .method-flow {
+  align-items: stretch;
+  display: grid;
+  gap: 1.25em;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.4em;
+}
+
+.reveal .method-step {
+  border-top: 0.14em solid $cfs-sage;
+  padding-top: 0.45em;
+}
+
+.reveal .method-step strong {
+  display: block;
+  font-size: 0.86em;
+  margin-bottom: 0.25em;
+}
+
+.reveal .method-step span {
+  display: block;
+  font-size: 0.7em;
+  line-height: 1.3;
+}
+
+// Footer, slide number, and per-slide suppression.
+.reveal .footer {
+  bottom: 0.75em;
+  color: #66756f;
+  font-size: 0.36em;
+  left: 1.7em;
+}
+
+.reveal .slide-number {
+  background: transparent;
+  bottom: 0.75em;
+  color: #66756f;
+  font-size: 0.36em;
+  right: 1.7em;
+}
+
+.reveal:has(.slides section.present.section-slide) .footer,
+.reveal:has(.slides section.present.section-slide) .slide-number,
+.reveal:has(.slides section.present.no-footer) .footer,
+.reveal:has(.slides section.present.no-footer) .slide-number,
+.reveal:has(.slides section.present.quarto-title-block) .footer,
+.reveal:has(.slides section.present.quarto-title-block) .slide-number {
+  display: none !important;
+}
+
+// Make footer and numbering legible on custom dark backgrounds when retained.
+.reveal.has-dark-background .footer,
+.reveal.has-dark-background .slide-number {
+  color: #ffffff;
+}
+
+// Compact helpers for dense scientific material.
+.reveal .small {
+  font-size: 0.78em;
+}
+
+.reveal .smaller {
+  font-size: 0.68em;
+}
+
+.reveal .muted {
+  color: #66756f;
+}
+
+.reveal .accent-blue {
+  color: $cfs-blue;
+}
+
+.reveal .accent-green {
+  color: $cfs-forest;
+}
+
+@media (max-width: 900px) {
+  #title-slide,
+  .reveal .slides section.quarto-title-block {
+    padding-right: 0;
+  }
+
+  #title-slide::after,
+  .reveal .slides section.quarto-title-block::after {
+    width: 24%;
+  }
+
+  .reveal .method-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media print {
+  .reveal .footer,
+  .reveal .slide-number {
+    color: #53635d;
+  }
+}

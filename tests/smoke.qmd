@@ -1,0 +1,24 @@
+---
+title: "Installed extension smoke test"
+author: "CFS Quarto tests"
+format:
+  cfs-revealjs:
+    footer: "Independent installation test"
+    slide-number: true
+---
+
+## Standard content
+
+The installed extension renders ordinary Markdown.
+
+## Test section {.section-slide}
+
+<div class="section-number">01 / Test</div>
+
+Dark divider styling
+
+## Test result {.key-result}
+
+<div class="key-number">1</div>
+
+<div class="key-label">Installed format rendered successfully</div>
