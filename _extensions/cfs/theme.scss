@@ -186,7 +186,7 @@ $border-radius: 0 !default;
   min-height: 100%;
   padding-top: 4em;
   padding-right: 0;
-  position: relative;
+  position: absolute;
   text-align: left;
 }
 
@@ -278,6 +278,11 @@ $border-radius: 0 !default;
   max-width: 46%;
   object-fit: contain;
   object-position: left bottom;
+}
+
+.cfs-title-branding .cfs-corporate-signature {
+  max-height: 4.4em;
+  max-width: 85%;
 }
 
 .cfs-title-branding-single {
@@ -376,38 +381,6 @@ $border-radius: 0 !default;
   margin-top: 1em;
 }
 
-// Conclusions
-.reveal .slides section.conclusion-slide {
-  background: $cfs-off-white;
-  border-top: 0.22em solid $cfs-forest;
-  min-height: 100%;
-}
-
-.reveal .slides section.conclusion-slide > h2 {
-  border-bottom-color: $cfs-sage;
-}
-
-.reveal .conclusion-slide ol,
-.reveal .conclusion-slide ul {
-  list-style: none;
-  margin-left: 0;
-}
-
-.reveal .conclusion-slide li {
-  border-bottom: 1px solid $cfs-rule;
-  padding: 0.38em 0 0.38em 1.35em;
-  position: relative;
-}
-
-.reveal .conclusion-slide li::before {
-  color: $cfs-sage;
-  content: "◆";
-  font-size: 0.58em;
-  left: 0;
-  position: absolute;
-  top: 0.78em;
-}
-
 // Methodology flow uses a flat inline composition rather than cards.
 .reveal .method-flow {
   align-items: stretch;
@@ -434,7 +407,21 @@ $border-radius: 0 !default;
   line-height: 1.3;
 }
 
-// Footer, slide number, and per-slide suppression.
+// Persistent project-supplied logo, footer, slide number, and per-slide
+// suppression. Quarto inserts `.slide-logo` when the native `logo` option is
+// set; the theme moves it to the lower-left and leaves official assets in the
+// presentation project rather than bundling them with the extension.
+.reveal.has-logo .slide-logo {
+  bottom: 0;
+  height: auto;
+  left: 1.7em;
+  max-height: 1.75em;
+  max-width: 14em;
+  right: auto;
+  transform: translateY(0.8em);
+  width: auto;
+}
+
 .reveal .footer {
   bottom: 0.75em;
   color: #66756f;
@@ -442,20 +429,42 @@ $border-radius: 0 !default;
   left: 1.7em;
 }
 
+.reveal.has-logo .footer {
+  left: 17em;
+  text-align: left;
+  width: fit-content;
+}
+
 .reveal .slide-number {
   background: transparent;
-  bottom: 0.75em;
+  bottom: 0.75em !important;
   color: #66756f;
   font-size: 0.36em;
   right: 1.7em;
+  top: auto !important;
+}
+
+.reveal.has-logo .slide-number {
+  bottom: 0.75em !important;
+  right: 1.7em;
+  top: auto !important;
+}
+
+// Keep the slide menu and its keyboard shortcut available without showing
+// the persistent hamburger trigger in the presentation chrome.
+.reveal .slide-menu-button {
+  display: none !important;
 }
 
 .reveal:has(.slides section.present.section-slide) .footer,
-.reveal:has(.slides section.present.section-slide) .slide-number,
 .reveal:has(.slides section.present.no-footer) .footer,
-.reveal:has(.slides section.present.no-footer) .slide-number,
 .reveal:has(.slides section.present.quarto-title-block) .footer,
 .reveal:has(.slides section.present.quarto-title-block) .slide-number {
+  display: none !important;
+}
+
+.reveal:has(.slides section.present.section-slide) .slide-logo,
+.reveal:has(.slides section.present.quarto-title-block) .slide-logo {
   display: none !important;
 }
 

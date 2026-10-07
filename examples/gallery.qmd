@@ -6,7 +6,9 @@ institute: "Organization or affiliation"
 bibliography: references.bib
 format:
   cfs-revealjs:
-    footer: "Organization name | Presentation title"
+    logo: ../NRCan_CFS_logo_PT_englishOnly.svg
+    cfs-corporate-signature: ../NRCan_CFS_logo_PT_englishOnly.svg
+    footer: "Presentation title"
     slide-number: c/t
     show-slide-number: all
 execute:
@@ -160,30 +162,6 @@ A second section can use the same divider layout
 <div class="key-label">A short statement that explains what the value represents</div>
 
 <div class="key-context">Include the comparison, uncertainty, or sample size here.</div>
-
-## Slide with a long title that wraps onto two lines without crowding the content
-
-:::: {.columns}
-
-::: {.column width="54%"}
-![](assets/synthetic-age-response.png){fig-alt="Synthetic response plotted against a predictor"}
-:::
-
-::: {.column width="42%"}
-The title remains separate from the figure and supporting text.
-
-Prefer shorter titles when possible, but retain precise wording when the
-scientific meaning requires it.
-:::
-
-::::
-
-## Conclusion slide {.conclusion-slide}
-
-- Restate the main finding in one sentence.
-- Include the most important quantitative result.
-- Name the limitation that changes interpretation.
-- End with the practical implication or next step.
 
 ## Footer-free figure slide {.full-figure .no-footer}
 

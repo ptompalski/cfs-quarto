@@ -22,6 +22,7 @@ if ($LASTEXITCODE -ne 0) { throw "Rendered theme checks failed." }
 
 Copy-Item -Recurse -LiteralPath (Join-Path $repositoryRoot "_extensions") -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "template.qmd") -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot "NRCan_CFS_logo_PT_englishOnly.svg") -Destination $packageRoot
 Compress-Archive -Path (Join-Path $packageRoot "*") -DestinationPath $archivePath
 
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "tests\smoke.qmd") -Destination $smokeRoot

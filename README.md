@@ -4,16 +4,17 @@ A personal theme for Quarto reveal.js presentations.
 
 ## Install
 
-Create a new presentation from the template:
+Create a new presentation from
+[ptompalski/cfs-quarto](https://github.com/ptompalski/cfs-quarto):
 
 ```bash
-quarto use template <repository-url>
+quarto use template ptompalski/cfs-quarto
 ```
 
 Add the theme to an existing project:
 
 ```bash
-quarto add <repository-url>
+quarto add ptompalski/cfs-quarto
 ```
 
 The repository includes a starter presentation and a gallery of the available

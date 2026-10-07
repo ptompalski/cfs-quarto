@@ -6,7 +6,9 @@ institute: "Organization or affiliation"
 date: today
 format:
   cfs-revealjs:
-    footer: "Canadian Forest Service | Research presentation"
+    logo: NRCan_CFS_logo_PT_englishOnly.svg
+    cfs-corporate-signature: NRCan_CFS_logo_PT_englishOnly.svg
+    footer: "Presentation title"
     slide-number: c/t
 execute:
   echo: true
@@ -62,10 +64,3 @@ Describe assumptions and validation in plain language.
 <div class="key-label">Replace this sentence with the main quantitative finding.</div>
 
 <div class="key-context">Report uncertainty, comparison, and sample size.</div>
-
-## Conclusions {.conclusion-slide}
-
-- State the answer to the research question.
-- Quantify the most important result.
-- Name the limitation that affects interpretation.
-- End with the practical implication.

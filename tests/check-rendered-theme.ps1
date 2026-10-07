@@ -36,12 +36,41 @@ if ($themeCss -match $forcedSectionDisplay) {
   throw "Theme CSS forces slide sections to display and breaks reveal.js navigation."
 }
 
+# A positioned title slide must remain absolute. Relative positioning makes a
+# loaded, inactive title slide occupy the first canvas and pushes slide 2 down
+# by the full presentation height.
+$relativeTitlePosition =
+  '(?s)#title-slide,[^\{]*section\.quarto-title-block\{[^\}]*position\s*:\s*relative'
+if ($themeCss -match $relativeTitlePosition) {
+  throw "The title slide uses relative positioning and displaces nearby slides."
+}
+
+if ($themeCss -notmatch 'slide-number\{[^\}]*bottom:[^;]*!important[^\}]*top:\s*auto\s*!important') {
+  throw "Slide numbers are not pinned to the bottom-right."
+}
+
+if ($themeCss -notmatch 'slide-menu-button\{display:\s*none\s*!important') {
+  throw "The visible slide-menu button is not suppressed."
+}
+
+if ($themeCss -match 'conclusion-slide') {
+  throw "Removed conclusion-slide styling remains in the compiled theme."
+}
+
 if ($themeCss -notmatch '--r-main-font:\s*Source Sans Pro') {
   throw "Source Sans Pro is not the primary compiled presentation font."
 }
 
 if ($themeCss -notmatch '--r-heading-font-weight:\s*600') {
   throw "Heading weight does not match the bundled Source Sans Pro semibold face."
+}
+
+if ($themeCss -match 'section\.present\.section-slide\) \.slide-number') {
+  throw "The theme suppresses slide numbers on section dividers."
+}
+
+if ($themeCss -notmatch 'section\.present\.section-slide\) \.slide-logo') {
+  throw "The theme does not suppress the persistent logo on section dividers."
 }
 
 $revealCssPath = Join-Path $galleryFiles "libs\revealjs\dist\reveal.css"
@@ -55,12 +84,13 @@ $requiredTokens = [ordered]@{
   "title slide" = 'id="title-slide"'
   "section divider" = "section-slide"
   "key result" = "key-result"
-  "conclusion" = "conclusion-slide"
   "columns" = 'class="columns'
   "speaker notes" = '<aside class="notes">'
   "incremental fragment" = "fragment"
   "citation" = 'role="doc-biblioref"'
   "figure alt text" = 'alt="Synthetic raster map'
+  "persistent logo" = 'class="slide-logo"'
+  "title logo" = 'class="cfs-corporate-signature"'
 }
 
 foreach ($check in $requiredTokens.GetEnumerator()) {
@@ -71,6 +101,21 @@ foreach ($check in $requiredTokens.GetEnumerator()) {
 
 if ($galleryHtml.Contains("Invalid Date")) {
   throw "The gallery contains an invalid placeholder date."
+}
+
+if (
+  $galleryHtml.Contains("conclusion-slide") -or
+  $galleryHtml.Contains("Slide with a long title that wraps onto two lines")
+) {
+  throw "The gallery still contains a removed slide or layout."
+}
+
+if ($galleryHtml.Contains("Organization name | Presentation title")) {
+  throw "The gallery footer still contains the organization placeholder."
+}
+
+if ($galleryHtml -notmatch 'NRCan_CFS_logo_PT_englishOnly\.svg') {
+  throw "The rendered gallery does not reference the supplied NRCan CFS logo."
 }
 
 $regularSlideStart = $galleryHtml.IndexOf('<section id="regular-content-slide"')
