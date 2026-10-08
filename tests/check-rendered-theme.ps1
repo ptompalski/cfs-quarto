@@ -45,8 +45,16 @@ if ($themeCss -match $relativeTitlePosition) {
   throw "The title slide uses relative positioning and displaces nearby slides."
 }
 
-if ($themeCss -notmatch 'slide-number\{[^\}]*bottom:[^;]*!important[^\}]*top:\s*auto\s*!important') {
-  throw "Slide numbers are not pinned to the bottom-right."
+if ($themeCss -notmatch 'slide-number\{[^\}]*bottom:\s*auto\s*!important[^\}]*right:\s*1\.7em[^\}]*top:\s*\.75em\s*!important') {
+  throw "Slide numbers are not pinned to the top-right."
+}
+
+if ($themeCss -notmatch 'has-logo \.slide-logo\{[^\}]*left:\s*\.35em') {
+  throw "The persistent logo is not aligned near the far-left edge."
+}
+
+if ($themeCss -notmatch 'has-logo \.footer\{[^\}]*left:\s*auto[^\}]*right:\s*1\.7em[^\}]*text-align:\s*right') {
+  throw "The persistent footer is not right-aligned at the bottom-right."
 }
 
 if ($themeCss -notmatch 'slide-menu-button\{display:\s*none\s*!important') {
@@ -73,6 +81,21 @@ if ($themeCss -notmatch 'section\.present\.section-slide\) \.slide-logo') {
   throw "The theme does not suppress the persistent logo on section dividers."
 }
 
+if ($themeCss -notmatch 'section\.present\.no-footer\) \.slide-logo') {
+  throw "The theme does not suppress the persistent logo on footer-free slides."
+}
+
+if (
+  $themeCss -notmatch 'section\.present\.figure-only\) \.footer' -or
+  $themeCss -notmatch 'section\.present\.figure-only\) \.slide-logo'
+) {
+  throw "The theme does not suppress both footer and logo on figure-only slides."
+}
+
+if ($themeCss -notmatch 'section\.figure-only>h2\{display:\s*none') {
+  throw "The figure-only layout does not suppress its empty title element."
+}
+
 $revealCssPath = Join-Path $galleryFiles "libs\revealjs\dist\reveal.css"
 $revealCss = Get-Content -Raw -LiteralPath $revealCssPath
 if ($revealCss -notmatch '\.reveal \.slides>section,\.reveal \.slides>section>section\{display:none') {
@@ -84,6 +107,7 @@ $requiredTokens = [ordered]@{
   "title slide" = 'id="title-slide"'
   "section divider" = "section-slide"
   "key result" = "key-result"
+  "figure-only slide" = 'id="figure-only-slide"'
   "columns" = 'class="columns'
   "speaker notes" = '<aside class="notes">'
   "incremental fragment" = "fragment"
@@ -120,6 +144,24 @@ if ($galleryHtml -notmatch '<div class="footer footer-default">\s*<p>Firstname L
 
 if ($galleryHtml -notmatch 'NRCan_CFS_logo_PT_englishOnly\.svg') {
   throw "The rendered gallery does not reference the supplied NRCan CFS logo."
+}
+
+$figureOnlySlideStart = $galleryHtml.IndexOf('<section id="figure-only-slide"')
+$referencesSlideStart = $galleryHtml.IndexOf('<section id="references"')
+if ($figureOnlySlideStart -lt 0 -or $referencesSlideStart -le $figureOnlySlideStart) {
+  throw "The titleless figure-only gallery slide could not be located."
+}
+
+$figureOnlySlide = $galleryHtml.Substring(
+  $figureOnlySlideStart,
+  $referencesSlideStart - $figureOnlySlideStart
+)
+if (
+  $figureOnlySlide -notmatch 'class="[^"]*figure-only' -or
+  $figureOnlySlide -notmatch '<h2>\s*</h2>' -or
+  $figureOnlySlide -notmatch 'synthetic-canopy-map\.png'
+) {
+  throw "The figure-only example is not a titleless slide containing only its figure."
 }
 
 $regularSlideStart = $galleryHtml.IndexOf('<section id="regular-content-slide"')

@@ -336,6 +336,27 @@ $border-radius: 0 !default;
   object-fit: contain;
 }
 
+// Titleless figure slides use the space released by the heading and chrome.
+.reveal .slides section.figure-only > h2 {
+  display: none;
+}
+
+.reveal .slides section.figure-only > p,
+.reveal .slides section.figure-only .quarto-figure,
+.reveal .slides section.figure-only figure {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.reveal .slides section.figure-only img {
+  display: block;
+  margin: 0 auto;
+  max-height: 780px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .reveal .slides section.full-bleed {
   padding: 0;
 }
@@ -414,7 +435,7 @@ $border-radius: 0 !default;
 .reveal.has-logo .slide-logo {
   bottom: 0;
   height: auto;
-  left: 1.7em;
+  left: 0.35em;
   max-height: 1.75em;
   max-width: 14em;
   right: auto;
@@ -422,32 +443,30 @@ $border-radius: 0 !default;
   width: auto;
 }
 
-.reveal .footer {
+.reveal .footer,
+.reveal.has-logo .footer {
   bottom: 0.75em;
   color: #66756f;
   font-size: 0.36em;
-  left: 1.7em;
-}
-
-.reveal.has-logo .footer {
-  left: 17em;
-  text-align: left;
+  left: auto;
+  right: 1.7em;
+  text-align: right;
   width: fit-content;
 }
 
 .reveal .slide-number {
   background: transparent;
-  bottom: 0.75em !important;
+  bottom: auto !important;
   color: #66756f;
   font-size: 0.36em;
   right: 1.7em;
-  top: auto !important;
+  top: 0.75em !important;
 }
 
 .reveal.has-logo .slide-number {
-  bottom: 0.75em !important;
+  bottom: auto !important;
   right: 1.7em;
-  top: auto !important;
+  top: 0.75em !important;
 }
 
 // Keep the slide menu and its keyboard shortcut available without showing
@@ -464,7 +483,13 @@ $border-radius: 0 !default;
 }
 
 .reveal:has(.slides section.present.section-slide) .slide-logo,
+.reveal:has(.slides section.present.no-footer) .slide-logo,
+.reveal:has(.slides section.present.figure-only) .slide-logo,
 .reveal:has(.slides section.present.quarto-title-block) .slide-logo {
+  display: none !important;
+}
+
+.reveal:has(.slides section.present.figure-only) .footer {
   display: none !important;
 }
 

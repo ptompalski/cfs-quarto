@@ -167,6 +167,10 @@ A second section can use the same divider layout
 
 ![](assets/synthetic-validation-panels.png){fig-alt="Synthetic residual histogram and quantile comparison"}
 
+## {#figure-only-slide .figure-only}
+
+![](assets/synthetic-canopy-map.png){fig-alt="Synthetic raster map with contours and a spatial-index legend"}
+
 ## References {.smaller}
 
 ::: {#refs}
